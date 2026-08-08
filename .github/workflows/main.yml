@@ -24,8 +24,18 @@ jobs:
       - name: Install Capacitor
         run: npm install @capacitor/core @capacitor/cli @capacitor/android
 
-      - name: Capacitor init
-        run: npx cap init "Baraka Market" uz.barakamarket.app --web-dir=public
+      - name: Write Capacitor config
+        run: |
+          cat > capacitor.config.json << 'EOF'
+          {
+            "appId": "uz.barakamarket.app",
+            "appName": "Baraka Market",
+            "webDir": "public",
+            "server": {
+              "androidScheme": "https"
+            }
+          }
+          EOF
 
       - name: Init Capacitor android platform
         run: npx cap add android
